@@ -1,4 +1,99 @@
 ======================
+ What's new in 2.2.7
+======================
+
+Release: 2025-01-10
+
+* Add ``user``, ``host``, ``database``, and ``db`` attributes to ``Connection``.
+  opentelemetry-instrumentation-(dbapi|mysqlclient) use them. (#753)
+
+======================
+ What's new in 2.2.6
+======================
+
+Release: 2024-11-12
+
+* MariaDB Connector/C 3.4 and MairaDB 11.4 enabled SSL and CA verification by default.
+  It affected 2.2.5 windows wheel. This release disables SSL and CA verification by default. (#731)
+
+* Add ``server_public_key_path`` option. It is needed to connect MySQL server with
+  ``sha256_password`` or ``caching_sha2_password`` authentication plugin without
+  secure connection. (#744)
+
+======================
+ What's new in 2.2.5
+======================
+
+Release: 2024-10-20
+
+* (Windows wheel) Update MariaDB Connector/C to 3.4.1. #726
+* (Windows wheel) Build wheels for Python 3.13. #726
+
+======================
+ What's new in 2.2.4
+======================
+
+Release: 2024-02-09
+
+* Support ``ssl=True`` in ``connect()``. (#700)
+  This makes better compatibility with PyMySQL and mysqlclient==2.2.1
+  with libmariadb. See #698 for detail.
+
+
+======================
+ What's new in 2.2.3
+======================
+
+Release: 2024-02-04
+
+* Fix ``Connection.kill()`` method that broken in 2.2.2. (#689)
+
+
+======================
+ What's new in 2.2.2
+======================
+
+Release: 2024-02-04
+
+* Support building with MySQL 8.3 (#688).
+* Deprecate ``db.shutdown()`` and ``db.kill()`` methods in docstring.
+  This is because ``mysql_shutdown()`` and ``mysql_kill()`` were removed in MySQL 8.3.
+  They will emit DeprecationWarning in the future but not for now.
+
+
+======================
+ What's new in 2.2.1
+======================
+
+Release: 2023-12-13
+
+* ``Connection.ping()`` avoid using ``MYSQL_OPT_RECONNECT`` option until
+  ``reconnect=True`` is specified. MySQL 8.0.33 start showing warning
+  when the option is used. (#664)
+* Windows: Update MariaDB Connector/C to 3.3.8. (#665)
+* Windows: Build wheels for Python 3.12 (#644)
+
+
+======================
+ What's new in 2.2.0
+======================
+
+Release: 2023-06-22
+
+* Use ``pkg-config`` instead of ``mysql_config`` (#586)
+* Raise ProgrammingError on -inf (#557)
+* Raise IntegrityError for ER_BAD_NULL. (#579)
+* Windows: Use MariaDB Connector/C 3.3.4 (#585)
+* Use pkg-config instead of mysql_config (#586)
+* Add collation option (#564)
+* Drop Python 3.7 support (#593)
+* Use pyproject.toml for build (#598)
+* Add Cursor.mogrify (#477)
+* Partial support of ssl_mode option with mariadbclient (#475)
+* Discard remaining results without creating Python objects (#601)
+* Fix executemany with binary prefix (#605)
+
+======================
  What's new in 2.1.1
 ======================
 
@@ -569,4 +664,3 @@ ursor.fetchXXXDict() methods raise DeprecationWarning
 cursor.begin() is making a brief reappearence.
 
 cursor.callproc() now works, with some limitations.
-

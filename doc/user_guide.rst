@@ -8,13 +8,13 @@ MySQLdb User's Guide
 Introduction
 ------------
 
-MySQLdb is an interface to the popular MySQL
-database server that provides the Python database API.
+MySQLdb is an interface to the popular MySQL or MariaDB
+database servers that provides the Python database API.
 
 Installation
 ------------
 
-The ``README`` file has complete installation instructions.
+The `README <https://github.com/PyMySQL/mysqlclient/blob/main/README.md>`_ file has complete installation instructions.
 
 
 MySQLdb._mysql
@@ -348,6 +348,22 @@ connect(parameters...)
 
             *This must be a keyword parameter.*
 
+         collation
+            If ``charset`` and ``collation`` are both supplied, the
+            character set and collation for the current connection
+            will be set.
+
+            If omitted, empty string, or None, the default collation
+            for the ``charset`` is implied by the database server.
+
+            To learn more about the quiddities of character sets and
+            collations, consult the `MySQL docs
+            <https://dev.mysql.com/doc/refman/8.0/en/charset.html>`_
+            and `MariaDB docs
+            <https://mariadb.com/kb/en/character-sets/>`_
+
+            *This must be a keyword parameter.*
+
          sql_mode
             If present, the session SQL mode will be set to the given
             string. For more information on sql_mode, see the MySQL
@@ -376,6 +392,10 @@ connect(parameters...)
             to the server; if there is no SSL support in the client,
             an exception is raised. *This must be a keyword
             parameter.*
+
+        server_public_key_path
+            specifies path to a RSA public key used by caching sha2 password authentication.
+            See https://dev.mysql.com/doc/refman/9.0/en/caching-sha2-pluggable-authentication.html
 
 .. _mysql_ssl_set: http://dev.mysql.com/doc/refman/en/mysql-ssl-set.html
 
