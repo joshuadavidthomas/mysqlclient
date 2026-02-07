@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: windows-latest
     env:
-      CONNECTOR_VERSION: "3.4.1"
+      CONNECTOR_VERSION: "3.4.8"
     steps:
       - name: Cache Connector
         id: cache-connector
@@ -23,7 +23,7 @@ jobs:
         if: steps.cache-connector.outputs.cache-hit != 'true'
         shell: bash
         run: |
-          curl -LO "https://downloads.mariadb.com/Connectors/c/connector-c-${CONNECTOR_VERSION}/mariadb-connector-c-${CONNECTOR_VERSION}-src.zip"
+          curl -LO "https://dlm.mariadb.com/4516912/Connectors/c/connector-c-${CONNECTOR_VERSION}/mariadb-connector-c-${CONNECTOR_VERSION}-src.zip"
           unzip "mariadb-connector-c-${CONNECTOR_VERSION}-src.zip" -d c:/
           mv "c:/mariadb-connector-c-${CONNECTOR_VERSION}-src" c:/mariadb-connector-src
 
@@ -82,7 +82,7 @@ jobs:
           CIBW_PROJECT_REQUIRES_PYTHON: ">=3.9"
           CIBW_ARCHS: "AMD64"
           CIBW_TEST_COMMAND: 'python -c "import MySQLdb; print(MySQLdb.version_info)" '
-        run: "python -m cibuildwheel --prerelease-pythons --output-dir dist"
+        run: "python -m cibuildwheel --output-dir dist"
 
       - name: Build sdist
         working-directory: mysqlclient
